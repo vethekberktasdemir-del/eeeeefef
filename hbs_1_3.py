@@ -38,7 +38,7 @@ class HBSApp(tk.Tk):
         self.minsize(1050, 680)
         self.configure(bg=BG_LIGHT)
         self.conn = sqlite3.connect(DB)
-        self.sort_state = {'column': 'expense_date', 'descending': True}
+        self.sort_state = {'column': 'date', 'descending': True}
         self._ensure_db()
         self._style()
         self._build()
