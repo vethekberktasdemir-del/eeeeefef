@@ -1,0 +1,36 @@
+name: Build HBS Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Repoyu indir
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: PyInstaller kur
+        run: py -m pip install --upgrade pyinstaller
+
+      - name: EXE derle
+        shell: pwsh
+        run: |
+          if (Test-Path "hbs_data.db") {
+            py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS --add-data "hbs_data.db;." hbs_prototype.py
+          } else {
+            py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS hbs_prototype.py
+          }
+
+      - name: EXE'yi yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: HBS-exe
+          path: dist/HBS.exe
