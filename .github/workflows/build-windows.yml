@@ -23,11 +23,7 @@ jobs:
       - name: EXE derle
         shell: pwsh
         run: |
-          if (Test-Path "hbs_data.db") {
-            py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS --add-data "hbs_data.db;." hbs_prototype.py
-          } else {
-            py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS hbs_prototype.py
-          }
+          py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS hbs_1_3.py
 
       - name: EXE'yi yükle
         uses: actions/upload-artifact@v4
