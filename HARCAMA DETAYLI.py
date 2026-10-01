@@ -73,6 +73,13 @@ class HBSAdvancedApp(tk.Tk):
                 note TEXT
             )
         ''')
+        expense_columns = {
+            row[1] for row in self.conn.execute('PRAGMA table_info(expenses)')
+        }
+        if 'category' not in expense_columns:
+            self.conn.execute(
+                "ALTER TABLE expenses ADD COLUMN category TEXT DEFAULT 'Diğer'"
+            )
         self.conn.execute('''
             CREATE TABLE IF NOT EXISTS income (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
