@@ -17,13 +17,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: PyInstaller kur
-        run: py -m pip install --upgrade pyinstaller
+      - name: Bağımlılıkları kur
+        run: py -m pip install --upgrade pyinstaller matplotlib
 
       - name: EXE derle
         shell: pwsh
         run: |
-          py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS hbs_1_3.py
+          py -m PyInstaller --noconfirm --clean --onefile --windowed --name HBS "HARCAMA DETAYLI.py"
 
       - name: EXE'yi yükle
         uses: actions/upload-artifact@v4
